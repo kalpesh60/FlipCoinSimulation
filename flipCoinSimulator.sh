@@ -1,12 +1,29 @@
 #!/bin/bash -x
 echo "Welcome to Flip Coin Simulation Problem"
 heads=0;
+tails=0
+count=0
 
-flip=$(($RANDOM%2))
-
-if [[ $flip -eq $heads ]]
+while [ $count -ne 11 ]
+do
+flip=$((RANDOM%2))
+if [ $flip -eq 1 ]
 then
-	echo "Winner is Heads"
+((heads++))
+else ((tails++))
+fi
+((count++))
+done
+
+echo heads=$heads
+echo tails=$tails
+
+if [ $heads -gt $tails ]
+then
+echo "winner is heads "
+elif [ $heads -lt $tails ]
+then
+echo "winner is tails"
 else
-	echo "Winner is Tails"
+echo "its tie"
 fi
