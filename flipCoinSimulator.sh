@@ -1,29 +1,42 @@
-#!/bin/bash -x
+#!/bin/bash
 echo "Welcome to Flip Coin Simulation Problem"
-heads=0;
-tails=0
-count=0
 
-while [ $count -ne 11 ]
-do
-flip=$((RANDOM%2))
-if [ $flip -eq 1 ]
+head=1
+tail=0
+randomCheck=$(( RANDOM%2 ))
+if [ $randomCheck -eq $head ]
 then
-((heads++))
-else ((tails++))
+	echo "coin flips head"
+else
+	echo "coin flips tail"
 fi
-((count++))
+
+while [ $valid ]
+randomCheck=$(( RANDOM%2 ))
+do
+   if [ $randomCheck -eq $head ]
+   then
+      count=$(( $count+1 ))
+   else [ $randomCheck -eq $tail ]
+      count1=$(( $count1+1 ))
+   fi
+   if [[ $count -eq 21 || $count1 -eq 21 ]]
+   then
+      break
+   fi
 done
 
-echo heads=$heads
-echo tails=$tails
+echo "head wins "$count" times"
+echo "tail wins "$count1" times"
 
-if [ $heads -gt $tails ]
+if [ $count -gt $count1 ]
 then
-echo "winner is heads "
-elif [ $heads -lt $tails ]
+   num=$(( $count-$count1 ))
+   echo "head wins tail by "$num" times"
+elif [ $count -lt $count1 ]
 then
-echo "winner is tails"
+   num=$(( $count1-$count))
+   echo "tail wins head by "$num" times"
 else
-echo "its tie"
+	echo "its a tie"
 fi
